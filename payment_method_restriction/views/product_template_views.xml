@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ============================================================
+         Artikel-Formular: Feld "Gesperrte Zahlungsarten" im
+         Abschnitt "E-Commerce-Shop" unter dem Reiter "Verkauf"
+    ============================================================ -->
+    <record id="product_template_form_view_blocked_payment" model="ir.ui.view">
+        <field name="name">product.template.form.blocked.payment.provider</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="website_sale.product_template_form_view"/>
+        <field name="arch" type="xml">
+
+            <!--
+                Wir hängen das neue Feld direkt nach dem vorhandenen
+                "website_published"-Widget-Block im E-Commerce-Abschnitt ein.
+                Der XPath greift auf die Gruppe, die "is_published" enthält.
+            -->
+            <xpath expr="//field[@name='website_published']/.." position="after">
+                <group string="Zahlungseinschränkungen">
+                    <field
+                        name="blocked_payment_provider_ids"
+                        widget="many2many_tags"
+                        options="{'color_field': 'color', 'no_create': True}"
+                        placeholder="Zahlungsanbieter auswählen, die gesperrt werden sollen …"
+                    />
+                </group>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>
