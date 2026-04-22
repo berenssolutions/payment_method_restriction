@@ -4,6 +4,11 @@
     <!-- ============================================================
          Artikel-Formular: Feld "Gesperrte Zahlungsarten" im
          Abschnitt "E-Commerce-Shop" unter dem Reiter "Verkauf"
+
+         Anker: website_id – dieses Feld ist in Odoo 18 stabil in der
+         website_sale.product_template_form_view vorhanden.
+         Wir fügen unsere Gruppe direkt NACH dem website_id-Feld ein,
+         damit wir im gleichen E-Commerce-Abschnitt bleiben.
     ============================================================ -->
     <record id="product_template_form_view_blocked_payment" model="ir.ui.view">
         <field name="name">product.template.form.blocked.payment.provider</field>
@@ -11,20 +16,15 @@
         <field name="inherit_id" ref="website_sale.product_template_form_view"/>
         <field name="arch" type="xml">
 
-            <!--
-                Wir hängen das neue Feld direkt nach dem vorhandenen
-                "website_published"-Widget-Block im E-Commerce-Abschnitt ein.
-                Der XPath greift auf die Gruppe, die "is_published" enthält.
-            -->
-            <xpath expr="//field[@name='website_published']/.." position="after">
-                <group string="Zahlungseinschränkungen">
-                    <field
-                        name="blocked_payment_provider_ids"
-                        widget="many2many_tags"
-                        options="{'color_field': 'color', 'no_create': True}"
-                        placeholder="Zahlungsanbieter auswählen, die gesperrt werden sollen …"
-                    />
-                </group>
+            <xpath expr="//field[@name='website_id']" position="after">
+                <field
+                    name="blocked_payment_provider_ids"
+                    widget="many2many_tags"
+                    string="Gesperrte Zahlungsarten"
+                    options="{'no_create': True}"
+                    placeholder="Zahlungsanbieter auswählen, die gesperrt werden sollen …"
+                    help="Diese Zahlungsanbieter werden im Checkout ausgeblendet, sobald dieser Artikel im Warenkorb liegt."
+                />
             </xpath>
 
         </field>
