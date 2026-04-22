@@ -1,2 +1,2 @@
 # -*- coding: utf-8 -*-
-from . import main
+# Kein Controller erforderlich – die Filterlogik sitzt im payment.provider-Model

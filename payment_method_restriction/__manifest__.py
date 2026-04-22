@@ -24,11 +24,6 @@
     'data': [
         'views/product_template_views.xml',
     ],
-    'assets': {
-        'web.assets_frontend': [
-            'payment_method_restriction/static/src/js/payment_restriction.js',
-        ],
-    },
     'installable': True,
     'application': False,
     'auto_install': False,
